@@ -8,3 +8,5 @@
 (venv) >>> pip install python-dotenv
 (venv) >>> python manage.py startapp authentication
 (venv) >>> python manage.py startapp todo
+(venv) >>> python manage.py makemigrations (name of app)
+(venv) >>> python manage.py migrate
