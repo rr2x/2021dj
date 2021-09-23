@@ -6,3 +6,5 @@
 (venv) >>> python manage.py runserver
 (venv) >>> python manage.py migrate
 (venv) >>> pip install python-dotenv
+(venv) >>> python manage.py startapp authentication
+(venv) >>> python manage.py startapp todo
