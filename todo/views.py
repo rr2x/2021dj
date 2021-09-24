@@ -3,6 +3,7 @@ from .forms import TodoForm
 from django.shortcuts import get_object_or_404, render
 from django.http.response import HttpResponseRedirect
 from django.urls import reverse
+from django.contrib import messages
 
 
 def get_showing_todos(request, todos):
@@ -46,6 +47,9 @@ def create_todo(request):
 
         todo.save()
 
+        messages.add_message(request, messages.SUCCESS,
+                             "Todo created successfully")
+
         return HttpResponseRedirect(reverse('todo66', kwargs={'id': todo.pk}))
 
     return render(request, 'todo/create-todo.html', context)
@@ -63,6 +67,9 @@ def todo_delete(request, id):
 
     if request.method == 'POST':
         todo.delete()
+
+        messages.add_message(request, messages.SUCCESS, "Todo delete success")
+
         return HttpResponseRedirect(reverse('home44'))
 
     return render(request, 'todo/todo-delete.html', context)
@@ -77,11 +84,13 @@ def todo_edit(request, id):
 
         todo.title = request.POST.get('title')
         todo.description = request.POST.get('description')
-        todo.is_completed = True if request.POST.get('is_completed', False) == "on" else False
+        todo.is_completed = True if request.POST.get(
+            'is_completed', False) == "on" else False
 
         todo.save()
 
-        return HttpResponseRedirect(reverse('todo66', kwargs={'id': todo.pk}))
+        messages.add_message(request, messages.SUCCESS, "Todo update success")
 
+        return HttpResponseRedirect(reverse('todo66', kwargs={'id': todo.pk}))
 
     return render(request, 'todo/todo-edit.html', context)

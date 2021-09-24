@@ -1,10 +1,16 @@
 {% extends '_partials/base.html' %}
 
+{% block title %}
+Create
+{% endblock title %}
+
 {% load static %}
 
 {% block content %}
 
 <h3>Create Todo</h3>
+
+{% include '_partials/messages.html' %}
 
 <form class="ui form" method="POST" action={% url 'create-todo55' %}>
   {% csrf_token %}
