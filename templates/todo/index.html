@@ -30,16 +30,30 @@
           {% endif%}
         </td>
         <td>
-          <a href="" class="ui button">
+          <a href={% url 'todo66' todo.pk %} class="ui button">
             <i class="eye icon"></i>
           </a>
-          <a href="" class="ui button">
+          <a href={% url 'todo-edit88' todo.pk %} class="ui button">
             <i class="pencil icon"></i>
           </a>
         </td>
       </tr>
       {% endfor %}
     </tbody>
+    <tfoot>
+      <tr>
+        <th>
+          <a href="?filter=all">All {{all_count}}</a>
+        </th>
+        <th>
+          <a href="?filter=incomplete">{{incomplete_count}} Remaining</a>
+        </th>
+        <th>
+          <a href="?filter=complete">{{completed_count}} Completed</a>
+        </th>
+        <th></th>
+      </tr>
+    </tfoot>
   </table>
 {% else %}
   <div class="ui message">

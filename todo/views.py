@@ -1,13 +1,31 @@
 from .models import Todo
 from .forms import TodoForm
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.http.response import HttpResponseRedirect
 from django.urls import reverse
 
 
+def get_showing_todos(request, todos):
+    if request.GET and request.GET.get('filter'):
+        if request.GET.get('filter') == 'complete':
+            return todos.filter(is_completed=True)
+        if request.GET.get('filter') == 'incomplete':
+            return todos.filter(is_completed=False)
+
+    return todos
+
+
 def index(request):
     todos = Todo.objects.all()
-    context = {'todos': todos}
+
+    completed_count = todos.filter(is_completed=True).count()
+    incomplete_count = todos.filter(is_completed=False).count()
+    all_count = todos.count()
+
+    context = {'todos': get_showing_todos(request, todos),
+               'all_count': all_count,
+               'completed_count': completed_count,
+               'incomplete_count': incomplete_count}
 
     return render(request, 'todo/index.html', context)
 
@@ -34,4 +52,36 @@ def create_todo(request):
 
 
 def todo_detail(request, id):
-    return render(request, 'todo/todo-detail.html', {})
+    todo = get_object_or_404(Todo, pk=id)
+    context = {'todo': todo}
+    return render(request, 'todo/todo-detail.html', context)
+
+
+def todo_delete(request, id):
+    todo = get_object_or_404(Todo, pk=id)
+    context = {'todo': todo}
+
+    if request.method == 'POST':
+        todo.delete()
+        return HttpResponseRedirect(reverse('home44'))
+
+    return render(request, 'todo/todo-delete.html', context)
+
+
+def todo_edit(request, id):
+    todo = get_object_or_404(Todo, pk=id)
+    form = TodoForm(instance=todo)
+    context = {'todo': todo, 'form': form}
+
+    if request.method == 'POST':
+
+        todo.title = request.POST.get('title')
+        todo.description = request.POST.get('description')
+        todo.is_completed = True if request.POST.get('is_completed', False) == "on" else False
+
+        todo.save()
+
+        return HttpResponseRedirect(reverse('todo66', kwargs={'id': todo.pk}))
+
+
+    return render(request, 'todo/todo-edit.html', context)
