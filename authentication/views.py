@@ -1,12 +1,15 @@
+from helpers.decorators import auth_user_should_not_access
 from django.contrib import auth
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from validate_email import validate_email
 from .models import User
-from django.contrib.auth import authenticate, login as auth_login  # to prevent collision
+# to prevent collision
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.urls import reverse
 
 
+@auth_user_should_not_access
 def register(request):
     if request.method == 'POST':
         context = {'has_error': False, 'data': request.POST}
@@ -61,6 +64,7 @@ def register(request):
     return render(request, 'authentication/register.html')
 
 
+@auth_user_should_not_access
 def login(request):
 
     if request.method == 'POST':
@@ -83,3 +87,13 @@ def login(request):
         return redirect(reverse('home44'))
 
     return render(request, 'authentication/login.html')
+
+
+def logout(request):
+
+    auth_logout(request)
+
+    messages.add_message(request, messages.SUCCESS,
+                         'Sucessfully loggedout')
+
+    return redirect(reverse('login11'))
