@@ -10,3 +10,12 @@
 (venv) >>> python manage.py startapp todo
 (venv) >>> python manage.py makemigrations (name of app)
 (venv) >>> python manage.py migrate
+
+
+
+>>> python manage.py shell
+>>> from authentication.models import User
+>>> User.objects.filter(is_email_verified=False).update(is_email_verified=True)
+
+
+>>> python manage.py test

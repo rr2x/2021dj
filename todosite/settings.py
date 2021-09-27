@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 from dotenv import load_dotenv
 import os
+import sys
 
 load_dotenv()
 
@@ -29,6 +30,9 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True  # False
+
+# flag if running on test mode
+TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
