@@ -1,17 +1,12 @@
-from django.test import TestCase
-from authentication.models import User
 from todo.models import Todo
+from utils.setup_test import TestSetup
 
 
-class TestModel(TestCase):
+class TestModel(TestSetup):
 
     def test_should_create_todo(self):
-        user = User.objects.create_user(
-            username='username', email='email@email.com')
-        user.set_password('passsssssss')
-        user.save()
-
+        user = self.create_test_user()
         todo = Todo(owner=user, title='NewTodo222', description='wowowowow')
         todo.save()
 
-        self.assertEqual(str(todo), 'NewTodo222')
+        self.assertEqual(str(todo), todo.title)

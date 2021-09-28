@@ -19,3 +19,20 @@
 
 
 >>> python manage.py test
+
+
+Faker = for test data
+>>> pip install faker
+
+side effects on testing = regression
+
+
+for testing:
+>>> pip install coverage
+
+# command below tests specific sources only:
+>>> coverage run --source "authentication,todo" manage.py test -v 2 && coverage report
+# check .coveragerc to skip other parts to speed up tests
+
+# for generating /htmlcov and open it on live server to see coverage:
+>>> coverage run --source "authentication,todo" manage.py test -v 2 && coverage report && coverage html

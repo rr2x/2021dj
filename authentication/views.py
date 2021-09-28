@@ -100,13 +100,17 @@ def register(request):
                                  'Username taken, choose another one')
             context['has_error'] = True
 
+            return render(request, 'authentication/register.html', context, status=409)
+
         if User.objects.filter(email=email).exists():
             messages.add_message(request, messages.ERROR,
                                  'Email taken, choose another one')
             context['has_error'] = True
 
-        if context['has_error']:
             return render(request, 'authentication/register.html', context, status=409)
+
+        if context['has_error']:
+            return render(request, 'authentication/register.html', context)
 
         user = User.objects.create_user(username=username, email=email)
         user.set_password(password)
@@ -138,12 +142,12 @@ def login(request):
         if not user:
             messages.add_message(request, messages.ERROR,
                                  'Invalid credentials')
-            return render(request, 'authentication/login.html', context)
+            return render(request, 'authentication/login.html', context, status=401)
 
         if not user.is_email_verified:
             messages.add_message(request, messages.ERROR,
                                  'Email is not verified, please check your email inbox')
-            return render(request, 'authentication/login.html', context)
+            return render(request, 'authentication/login.html', context, status=401)
 
         auth_login(request, user)
 
