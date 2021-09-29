@@ -74,3 +74,8 @@ config vars heroku: DISABLE_COLLECTSTATIC = 1
 and also add .env values
 
 python manage.py collectstatic
+
+
+NOTE: not only on staging, but also on deployed app
+(production) you must mirror the environment variables
+along with DISABLE_COLLECTSTATIC = 1
