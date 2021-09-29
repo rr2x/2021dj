@@ -36,3 +36,17 @@ for testing:
 
 # for generating /htmlcov and open it on live server to see coverage:
 >>> coverage run --source "authentication,todo" manage.py test -v 2 && coverage report && coverage html
+
+https://www.postgresql.org/download/windows/
+
+>>> pip install psycopg2
+>>> python manage.py migrate
+
+>>> python manage.py createsuperuser
+
+u/e: superuser@app.com
+p: 5bgfrbgRHYTTYH%867uj%534grvfFF
+
+
+can override template based on using /templates/ folder
+and override what was available at /venv/Lib/django/contrib/admin/templates/admin/

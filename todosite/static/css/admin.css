@@ -1,0 +1,19 @@
+#header {
+  background-color: blueviolet;
+}
+
+.module caption {
+  background-color: #30caa0;
+}
+
+div .breadcrumbs {
+  background-color: #30caa0;
+}
+
+.button,
+input[type='submit'],
+input[type='button'],
+.submit-row input,
+a.button {
+  background: #10284e;
+}
