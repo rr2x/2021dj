@@ -50,3 +50,16 @@ p: 5bgfrbgRHYTTYH%867uj%534grvfFF
 
 can override template based on using /templates/ folder
 and override what was available at /venv/Lib/django/contrib/admin/templates/admin/
+
+
+https://github.com/actions
+
+
+>>> pip freeze > requirements.txt   # this is what .github/workflows/python-app.yml will use
+
+>>> git fetch origin rr2x-patch-1
+
+-- select rr2x-patch-1 as active branch on vscode
+
+
+add .env variables here: https://github.com/rr2x/2021dj/settings/secrets/actions

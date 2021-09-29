@@ -10,8 +10,6 @@ class TestViews(TestSetup):
 
         user = self.create_test_user()
 
-        print(user.username)
-
         self.client.post(reverse('login11'), {
             'username': user.username,
             'password': 'passsssssss'
