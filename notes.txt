@@ -72,3 +72,5 @@ heroku -> new -> create new pipeline
 config vars heroku: DISABLE_COLLECTSTATIC = 1
 
 and also add .env values
+
+python manage.py collectstatic
